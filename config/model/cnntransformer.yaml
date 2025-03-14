@@ -1,0 +1,27 @@
+# @package _global_
+
+module:
+  _target_: emg2qwerty.lightning.CNNTransformerCTCModule
+  in_features: 528
+  mlp_features:
+    - 384
+  transformer_params:
+    num_heads: 64
+    num_layers: 5
+    d_model: 1024
+    ff_dim: 1024
+    dropout: 0.1
+  num_blocks: 4
+  cnn_params:
+    kernel_size: 3
+    padding: 1
+    pool_kernel: 2
+  residual_connection: true
+
+datamodule:
+  _target_: emg2qwerty.lightning.WindowedEMGDataModule
+  window_length: 8000
+  padding:
+    - 1800
+    - 200
+
